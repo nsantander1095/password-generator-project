@@ -9,12 +9,13 @@ function generatePassword() {
 
   var characters = 12;
 
+  var possible = '';
+  var password = '';
+
   var hasLower = confirm('has lower case letter?');
   var hasUpper = confirm('has upper case letter?');
   var hasNumber = confirm('has number?');
   var hasSpecial = confirm('has special character?');
-
-  var possible;
 
   if (hasLower) {
     possible += lower;
@@ -28,7 +29,11 @@ function generatePassword() {
   if (hasSpecial) {
     possible += special;
   }
-
+  for (var i = 0; i < characters; i++) {
+    var random = Math.floor(Math.random() * possible.length);
+    console.log(random);
+    password += possible[random[i]];
+  }
   
   debugger;
 
@@ -41,14 +46,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
-  for (var i = 0; i < characters; i++) {
-    var random = Math.floor(Math.random() * possible.length);
-    console.log(random);
-    password += password[random];
-  }
-  
-
 }
 
 // Add event listener to generate button
