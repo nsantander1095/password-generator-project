@@ -7,37 +7,38 @@ function generatePassword() {
   var numbers = '0123456789';
   var special = '"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
 
-  var characters = 12;
+  var characters = prompt('Password length must be between 8 and 128 characters.');
 
   var possible = '';
   var password = '';
 
-  var hasLower = confirm('has lower case letter?');
-  var hasUpper = confirm('has upper case letter?');
-  var hasNumber = confirm('has number?');
-  var hasSpecial = confirm('has special character?');
+  if (characters >= 8 && characters <= 128) {
+    var needLower = confirm('Do you require a lowercase letter?');
+    var needUpper = confirm('Do you require an uppercase letter?');
+    var needNumber = confirm('Do you require a number?');
+    var needSpecial = confirm('Do you require a special character?');
 
-  if (hasLower) {
-    possible += lower;
+    if (needLower) {
+      possible += lower;
+    }
+    if (needUpper) {
+      possible += upper;
+    }
+    if (needNumber) {
+      possible += numbers;
+    }
+    if (needSpecial) {
+      possible += special;
+    }
+    for (var i = 0; i < characters; i++) {
+      var random = Math.floor(Math.random() * possible.length);
+      console.log(random);
+      password += possible[random];
+    }
+    alert(password);
+  } else {
+    alert('Please reload page.');
   }
-  if (hasUpper) {
-    possible += upper;
-  }
-  if (hasNumber) {
-    possible += numbers;
-  }
-  if (hasSpecial) {
-    possible += special;
-  }
-  for (var i = 0; i < characters; i++) {
-    var random = Math.floor(Math.random() * possible.length);
-    console.log(random);
-    password += possible[random[i]];
-  }
-  
-  debugger;
-
-  return '';
 }
 
 // Write password to the #password input
